@@ -1,0 +1,20 @@
+    def preMedium(self,variable):
+        from statistics import mean
+        output_mean = {}
+        output_dwellings = {}
+        for i in variable:
+            count = -1
+            count_dw = 0
+            aux_1 = []
+            aux_2 = [0] * 8760
+            for j in variable[i]:
+                aux_1.append(sum(variable[i][str(j)]))
+                count = count + 1
+                count_dw = count_dw + 1
+                aux_2[count] = aux_2[count] + variable[i][j]
+            output_dwellings.setdefault(i, mean(aux_1))     
+            output_mean.setdefault(i,aux_2)
+            for n in output_mean:
+                for m in output_mean[n]:
+                    output_mean[n][m] = output_mean[n][m]/count_dw
+        return output_dwellings, output_mean
